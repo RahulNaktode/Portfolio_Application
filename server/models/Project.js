@@ -9,7 +9,6 @@ const ProjectSchema = new Schema({
         type: String,
         required: true
     },
-    tags: [String],
     imageUrl: {
         type: String
     },

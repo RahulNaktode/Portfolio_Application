@@ -30,6 +30,34 @@ const postProject = async (req, res) => {
     }
 }
 
+const deleteProject = async (req, res) => {
+    try {
+    const { id } = req.params;
+
+    const deletedProject = await Project.findByIdAndDelete(id);
+
+    if (!deletedProject) {
+      return res.json({
+        success: false,
+        message: "Project not found",
+        data: null
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Project deleted successfully",
+      data: deletedProject,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: `Project deletion failed: ${error.message}`,
+      data: null,
+    });
+  }
+
+}
 
 
-export { postProject}
+export { postProject, deleteProject}

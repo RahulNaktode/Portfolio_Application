@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connentDB from "./db.js";
 import { getHome, getHealth } from "./controllers/health.js";
-import { postProject } from "./controllers/newProjects.js";
+import { postProject, deleteProject } from "./controllers/newProjects.js";
 import { createMessage } from "./controllers/message.js";
 
 dotenv.config();
@@ -19,6 +19,7 @@ app.get("/", getHome);
 app.get("/health", getHealth);
 
 app.post("/project", postProject)
+app.delete("/delete/:id", deleteProject)
 app.post("/message", createMessage)
 
 app.listen(PORT, (req, res) => {

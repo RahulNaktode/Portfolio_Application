@@ -31,10 +31,9 @@ function Project() {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef();
 
-  // ImageKit Authenticator
   const authenticator = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth");
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth`);
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`Request failed with status ${response.status}: ${errorText}`);
@@ -113,9 +112,9 @@ function Project() {
   // Fetch Projects from API
   const fetchProjects = async () => {
   try {
-    const res = await axios.get("http://localhost:8080/fetchproject");
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/fetchproject`);
 
-    console.log("Backend Response:", res.data); // Console me check karein response ka shape
+    console.log("Backend Response:", res.data);
 
     if (res.data && res.data.success && Array.isArray(res.data.data)) {
       setProjects(res.data.data);
@@ -144,7 +143,6 @@ function Project() {
     }));
   };
 
-  // Add Project Submit Handler
   const addProject = async (e) => {
     e.preventDefault();
 
@@ -154,7 +152,7 @@ function Project() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8080/project", newProject);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/project`, newProject);
 
       if (response.data.success) {
         toast.success(response.data.message || "Project added successfully!", { id: "addProjectSuccess" });
@@ -165,7 +163,6 @@ function Project() {
           fetchProjects();
         }
 
-        // Reset form & close modal
         setNewProject({
           title: "",
           description: "",
@@ -185,7 +182,6 @@ function Project() {
 
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8">
-      {/* Header & Add Button */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-6">
         <div>
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-100 flex items-center gap-2">
@@ -202,7 +198,6 @@ function Project() {
         </button>
       </div>
 
-      {/* Published Projects Grid */}
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
           🚀 Published Projects ({projects.length})
@@ -282,7 +277,6 @@ function Project() {
         )}
       </div>
 
-      {/* Add Project Modal Popup */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-xl relative shadow-2xl space-y-4 my-8">
@@ -323,7 +317,6 @@ function Project() {
                 />
               </div>
 
-              {/* ImageKit File Upload Section */}
               <div className="space-y-2 border border-slate-800 p-3 rounded-xl bg-slate-950/50">
                 <label className="block text-xs font-semibold text-slate-300">Upload Project Screenshots (ImageKit)</label>
                 
@@ -345,7 +338,6 @@ function Project() {
                   </button>
                 </div>
 
-                {/* Progress Bar */}
                 {progress > 0 && (
                   <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2">
                     <div
@@ -355,7 +347,6 @@ function Project() {
                   </div>
                 )}
 
-                {/* Uploaded Images Gallery Preview */}
                 {newProject.imageUrl && newProject.imageUrl.length > 0 && (
                   <div className="flex flex-wrap gap-2 pt-2">
                     {newProject.imageUrl.map((photo, index) => (
@@ -375,7 +366,6 @@ function Project() {
                 )}
               </div>
 
-              {/* Links Grid */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1">Live Demo URL</label>

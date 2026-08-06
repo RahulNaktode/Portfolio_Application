@@ -44,8 +44,7 @@ function Contact() {
   setSuccessMessage("");
 
   try {
-    // 1. Send formData in axios payload
-    const response = await axios.post("http://localhost:8080/message", formData);
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/message`, formData);
 
     if (response.status === 200 || response.status === 201 || response.data?.success) {
       const firstName = formData.name ? formData.name.split(" ")[0] : "there";

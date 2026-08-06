@@ -6,7 +6,6 @@ import { upload } from "@imagekit/react";
 import PhotoViwer from "./PhotoViwer";
 
 function Certifications() {
-  // 1. Fixed Date Initialization Error (new Date())
   const [certifications, setCertifications] = useState([]);
   const [newCert, setNewCert] = useState({
     title: "",
@@ -18,12 +17,10 @@ function Certifications() {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
-  // ImageKit Upload States
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef();
 
-  // Helper Function for Safe Image URL Resolution
   const resolveImageUrl = (img) => {
     if (!img) return null;
     if (Array.isArray(img)) return img[0] || null;
@@ -31,10 +28,9 @@ function Certifications() {
     return null;
   };
 
-  // ImageKit Authenticator
   const authenticator = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth");
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth`);
       if (!response.ok) throw new Error("Auth failed");
       return await response.json();
     } catch (error) {
@@ -64,7 +60,6 @@ function Certifications() {
         onProgress: (event) => setProgress(Math.round((event.loaded / event.total) * 100)),
       });
 
-      // Handle ImageKit URL string
       const uploadedUrl = uploadResponse.url || uploadResponse.filePath;
       setNewCert((prev) => ({ ...prev, imageUrl: uploadedUrl }));
       toast.success("Certificate image uploaded!");
@@ -78,13 +73,11 @@ function Certifications() {
     }
   };
 
-  // Fetch Certificates from Backend
   const fetchCertificates = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/fetchcertificate");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/fetchcertificate`);
       console.log("Backend Response:", res.data);
 
-      // Extract array safely from any key structure
       const rawData = res.data?.data || res.data?.certificates || res.data;
 
       if (Array.isArray(rawData)) {
@@ -118,7 +111,7 @@ function Certifications() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8080/certificate", newCert);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/certificate`, newCert);
 
       if (response.data?.success) {
         toast.success(response.data.message || "Certification added successfully!");

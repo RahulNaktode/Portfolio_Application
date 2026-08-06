@@ -1,4 +1,4 @@
-import Certificate from "../models/certificate.js";
+import Certificate from "../models/Certificate.js";
 
 const postCertificate = async (req, res) => {
     const { title, imageUrl, completionDate } = req.body;

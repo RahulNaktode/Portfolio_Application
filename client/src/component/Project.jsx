@@ -111,25 +111,25 @@ function Project() {
 
   // Fetch Projects from API
   const fetchProjects = async () => {
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/fetchproject`);
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/fetchproject`);
 
-    console.log("Backend Response:", res.data);
+      console.log("Backend Response:", res.data);
 
-    if (res.data && res.data.success && Array.isArray(res.data.data)) {
-      setProjects(res.data.data);
-    } else if (Array.isArray(res.data)) {
-      setProjects(res.data);
-    } else {
+      if (res.data && res.data.success && Array.isArray(res.data.data)) {
+        setProjects(res.data.data);
+      } else if (Array.isArray(res.data)) {
+        setProjects(res.data);
+      } else {
+        setProjects([]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch projects:", err);
       setProjects([]);
+    } finally {
+      setFetching(false);
     }
-  } catch (err) {
-    console.error("Failed to fetch projects:", err);
-    setProjects([]);
-  } finally {
-    setFetching(false);
-  }
-};
+  };
 
   useEffect(() => {
     fetchProjects();
@@ -227,18 +227,18 @@ function Project() {
                     )}
 
                     {item.imageUrl ? (
-  <div className="h-44 w-full mb-4 rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
-    <img 
-      src={Array.isArray(item.imageUrl) ? item.imageUrl[0] : item.imageUrl} 
-      alt={item.title || "Project Image"} 
-      className="w-full h-full object-cover" 
-    />
-  </div>
-) : (
-  <div className="h-44 w-full mb-4 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs">
-    No Image Provided
-  </div>
-)}
+                      <div className="h-44 w-full mb-4 rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+                        <PhotoViwer
+                        imageUrl={item.imageUrl}
+                        alt={item?.title || "Certificate Image"}
+                        className="w-full h-full object-cover"
+                      />
+                      </div>
+                    ) : (
+                      <div className="h-44 w-full mb-4 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-center text-slate-600 text-xs">
+                        No Image Provided
+                      </div>
+                    )}
 
                     <h4 className="text-lg font-bold text-slate-100 mb-1">{item.title}</h4>
                     <p className="text-xs text-slate-400 leading-relaxed line-clamp-3 mb-4">
@@ -319,7 +319,7 @@ function Project() {
 
               <div className="space-y-2 border border-slate-800 p-3 rounded-xl bg-slate-950/50">
                 <label className="block text-xs font-semibold text-slate-300">Upload Project Screenshots (ImageKit)</label>
-                
+
                 <div className="flex gap-2">
                   <input
                     type="file"

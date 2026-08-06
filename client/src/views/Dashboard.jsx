@@ -17,7 +17,7 @@ function Dashboard() {
         <Education />
         <section id="contact" className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-100">Contact</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-100">Contact Me</h2>
             <p className="text-sm text-slate-400 mt-2">Have a project in mind or want to collaborate? Feel free to reach out.</p>
           </div>
           <Contact />

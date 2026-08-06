@@ -44,7 +44,7 @@ function Navbar() {
 
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/RahulNaktode"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub Profile"
@@ -53,7 +53,7 @@ function Navbar() {
             <img src={GithubIcon} alt="GitHub" className="h-4 w-4 object-contain invert brightness-200" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/rahul-naktode/"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn Profile"

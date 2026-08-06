@@ -10,7 +10,7 @@ const ProjectSchema = new Schema({
         required: true
     },
     imageUrl: {
-        type: String
+        type: [String]
     },
     demoLink: {
         type: String

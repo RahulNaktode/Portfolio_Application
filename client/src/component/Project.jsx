@@ -181,7 +181,7 @@ function Project() {
   };
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8">
+    <section id="project" className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-6">
         <div>
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-100 flex items-center gap-2">

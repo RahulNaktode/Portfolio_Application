@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Terminal, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import GithubIcon from "../assets/github.png";
 import LinkedInIcon from "../assets/linkedIn.png";
+import Logo from "../assets/logo.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
+    { name: "Projects", href: "#project" },
     { name: "Certifications", href: "#certifications" },
     { name: "Education", href: "#education" },
     { name: "Contact", href: "#contact" },
@@ -21,8 +22,8 @@ function Navbar() {
           href="#top"
           className="flex items-center gap-2 text-sm font-semibold tracking-tight text-slate-100 hover:opacity-80 transition-opacity"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <Terminal className="h-4 w-4" />
+          <div className="flex h-8 w-8 items-center justify-center ">
+            <img src={Logo} alt="Logo" className="h-12 w-8 object-contain" />
           </div>
           <span className="font-display text-base font-bold bg-gradient-to-r from-slate-100 to-slate-400 bg-clip-text text-transparent">
             Rahul Naktode
